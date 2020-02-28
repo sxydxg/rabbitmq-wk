@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/rabbitmq-01-hello/rabbitmq-01-hello.iml" filepath="$PROJECT_DIR$/rabbitmq-01-hello/rabbitmq-01-hello.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rabbitmq-02-springboot/rabbitmq-02-springboot.iml" filepath="$PROJECT_DIR$/rabbitmq-02-springboot/rabbitmq-02-springboot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rabbitmq-03-study/rabbitmq-03-study.iml" filepath="$PROJECT_DIR$/rabbitmq-03-study/rabbitmq-03-study.iml" />
+    </modules>
+  </component>
+</project>
