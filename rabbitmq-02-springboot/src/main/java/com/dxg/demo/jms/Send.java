@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @author dingxigui
  * @date 2019/12/20
  */
-@Component
+//@Component
 public class Send {
 
     @Autowired

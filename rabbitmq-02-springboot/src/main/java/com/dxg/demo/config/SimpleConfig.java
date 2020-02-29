@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @author dingxigui
  * @date 2019/12/20
  */
-@Configuration
+//@Configuration
 public class SimpleConfig {
 
 
