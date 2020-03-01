@@ -82,7 +82,7 @@ public class RabbitMqTest2 extends AbstractTestNGSpringContextTests{
     }
 
     //手动ack
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void test2Recvie() throws IOException {
 
         //这里一直发送消息

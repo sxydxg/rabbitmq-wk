@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
  * @author dingxigui
  * @date 2020/2/29
  */
-@Configuration
+//@Configuration
 public class Config2 {
 
 
@@ -83,6 +83,7 @@ public class Config2 {
 
     /**
      *   不同业务类型可以有不同消息监听容器
+     *   SimpleMessageListenerContainer其所有参数都可以动态修改，包括移除部分监听的队列
      * @param connectionFactory
      * @return
      */
@@ -107,6 +108,23 @@ public class Config2 {
         simpleMessageListenerContainer.setDeclarationRetries(3);
         //重试间隔时间
         simpleMessageListenerContainer.setRetryDeclarationInterval(1000);
+
+
+        MessagePostProcessor post1 = (message)->{
+            System.out.println("post1执行了");
+            message.getMessageProperties().setHeader("post1","haha");
+            return message ;
+        };
+        MessagePostProcessor post2 = (message)->{
+            message.getMessageProperties().setHeader("psot2","hehe");
+            System.out.println("post2执行了");
+            return message ;
+        };
+        //可以设置多个message接口的后置处理器
+        //在接受消息前执行这个消息后置处理器
+        simpleMessageListenerContainer.setAfterReceivePostProcessors(post1,post2);
+
+
         //设置消息处理监听者
 /*        simpleMessageListenerContainer.setMessageListener((Message message)->{
             try {
@@ -120,6 +138,8 @@ public class Config2 {
         simpleMessageListenerContainer.setChannelAwareMessageListener((message,channel)->{
 
             try {
+                System.out.println(message.getMessageProperties().getHeaders().get("post1"));
+                System.out.println(message.getMessageProperties().getHeaders().get("psot2"));
                 System.out.println(new String(message.getBody(),"utf-8"));
                 //手动签收消息
                 long deliveryTag = message.getMessageProperties().getDeliveryTag();
