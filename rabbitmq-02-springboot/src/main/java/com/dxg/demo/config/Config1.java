@@ -18,7 +18,7 @@ import java.nio.channels.Channel;
  * @author dingxigui
  * @date 2020/2/29
  */
-@Configuration
+//@Configuration
 public class Config1 {
 
 

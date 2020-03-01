@@ -17,6 +17,9 @@ import java.io.UnsupportedEncodingException;
  * rabbitmq测试
  *
  *      rabbitmq发送消息时你的交换机或则队列不存在时默认是不创建的，需要由你手动创建
+ *
+ *      该test例子使用Config1作为配置    com.dxg.demo.config.Config1 （没有打开哦！！！）
+ *
  * @author dingxigui
  * @date 2020/2/29
  */
