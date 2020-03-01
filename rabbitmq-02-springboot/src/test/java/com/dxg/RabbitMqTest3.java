@@ -40,6 +40,7 @@ public class RabbitMqTest3 extends AbstractTestNGSpringContextTests{
         for(int i=0;i<10;i++){
             Message message = MessageBuilder.withBody(("消息" + i).getBytes("utf-8"))
                     .setMessageId("" + i)
+                    .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
                     .build();
 
             rabbitTemplate.send("",queue,message);

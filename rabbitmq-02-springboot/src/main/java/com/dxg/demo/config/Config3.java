@@ -92,6 +92,8 @@ public class Config3 {
         //发送放要知道交换机或者路由key，但是接受方只要知道queue就行了
         simpleMessageListenerContainer.setQueueNames("convert_queue001");
 
+        //翻看MessageListenerAdapter 的onmessage的源码可知，该类不支持手动签收，如果要消息转换则需要为自动签收
+
         //通过反射调用目标的指定方法
         MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter();
         //设置message Convert
@@ -99,10 +101,12 @@ public class Config3 {
         messageListenerAdapter.setMessageConverter(new TextMessageConvert());
         messageListenerAdapter.setDelegate(new MessageDelegate());
         messageListenerAdapter.setDefaultListenerMethod("consumeMessage");
-        simpleMessageListenerContainer.setMessageListener(messageListenerAdapter);
 
-        //simpleMessageListenerContainer.setChannelAwareMessageListener(messageListenerAdapter);
+//        simpleMessageListenerContainer.setMessageListener(messageListenerAdapter);
+
+        simpleMessageListenerContainer.setChannelAwareMessageListener(messageListenerAdapter);
         return simpleMessageListenerContainer ;
     }
+
 
 }
