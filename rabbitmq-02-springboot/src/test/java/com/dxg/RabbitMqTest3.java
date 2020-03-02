@@ -32,7 +32,7 @@ public class RabbitMqTest3 extends AbstractTestNGSpringContextTests{
 
 
     //消息转换
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void test1Convert() throws IOException {
 
         //这里一直发送消息

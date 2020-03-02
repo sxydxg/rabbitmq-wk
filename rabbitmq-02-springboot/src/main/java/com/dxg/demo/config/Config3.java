@@ -24,7 +24,7 @@ import java.io.UnsupportedEncodingException;
  * @author dingxigui
  * @date 2020/2/29
  */
-@Configuration
+//@Configuration
 public class Config3 {
 
 
@@ -92,7 +92,10 @@ public class Config3 {
         //发送放要知道交换机或者路由key，但是接受方只要知道queue就行了
         simpleMessageListenerContainer.setQueueNames("convert_queue001");
 
+
         //翻看MessageListenerAdapter 的onmessage的源码可知，该类不支持手动签收，如果要消息转换则需要为自动签收
+        // 如果要手动签收我直接重写它的源码（onMessage（消息，通道）方法即可）
+
 
         //通过反射调用目标的指定方法
         MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter();
