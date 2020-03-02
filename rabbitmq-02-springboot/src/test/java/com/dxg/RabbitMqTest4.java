@@ -93,7 +93,7 @@ public class RabbitMqTest4 extends AbstractTestNGSpringContextTests{
     }
 
     //消息发送前可以做一些处理
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void test3() throws UnsupportedEncodingException {
         //声明一个队列
         amqpAdmin.declareQueue(new Queue("post_queue"));
