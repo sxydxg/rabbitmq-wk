@@ -88,6 +88,9 @@ public class RabbitMqTest5 extends AbstractTestNGSpringContextTests{
         //这个方法不知道有什么意义，唉，放他一命吧
 //        rabbitTemplate.setMessagePropertiesConverter();
         rabbitTemplate.convertAndSend("","queue777",student);
+
+        //比如在这个时候就会调用fromMessage
+//        rabbitTemplate.receiveAndConvert()
     }
 
 }
