@@ -69,7 +69,7 @@ public class RabbitMqTest4 extends AbstractTestNGSpringContextTests{
      *  当发送消息没有正确队列等等问题会将消息返回
      * @throws UnsupportedEncodingException
      */
-    @Test(enabled = true)
+    @Test(enabled =false)
     public void test2confirm() throws UnsupportedEncodingException {
         Message message = MessageBuilder.withBody("一条无法正确路由的消息".getBytes("utf-8"))
                 .setMessageId("111")
@@ -92,18 +92,34 @@ public class RabbitMqTest4 extends AbstractTestNGSpringContextTests{
 
     }
 
-    public void test2(){
+    //消息发送前可以做一些处理
+    @Test(enabled = true)
+    public void test3() throws UnsupportedEncodingException {
+        //声明一个队列
+        amqpAdmin.declareQueue(new Queue("post_queue"));
 
-        //有道词典把 ctrl+alt+v 快速返回值得快捷键给冲突了，靠
-        //英语翻译：相关 数据
-        CorrelationData correlationData = new CorrelationData();
-        //该对象就只保存一个与消息相关的id值
-        correlationData.setId("123");
-        //        rabbitTemplate.setBeforePublishPostProcessors();
-        //        rabbitTemplate.setReturnCallback(((Message msg, int replyCode, String replyText,
-//                String exchange, String routingKey)->{
-//
-//        }));
-
+        Message message = MessageBuilder.withBody("simple message".getBytes("utf-8"))
+                .setMessageId("111")
+                .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
+                .build();
+        //可以添加多个
+        MessagePostProcessor post1 = (msg)->{
+            //MessageBuilder.fromMessage(msg);  浅拷贝（引用）
+            //MessageBuilder.fromClonedMessage(msg);深拷贝
+            return MessageBuilder.fromMessage(message).setHeader("postBean1","post1").build();
+        };
+        MessagePostProcessor post2= (msg2)->{
+            //MessageBuilder.fromMessage(msg);  浅拷贝（引用）
+            //MessageBuilder.fromClonedMessage(msg);深拷贝
+            return MessageBuilder.fromMessage(msg2).setHeader("postBean2","post2").build();
+        };
+        //可以添加多个
+        rabbitTemplate.setBeforePublishPostProcessors(post1,post2);
+        rabbitTemplate.send("","post_queue",message);
+        Message m = rabbitTemplate.receive("post_queue");
+        System.out.println("----------------------华丽的分割线--------------------------------");
+        System.out.println(new String(m.getBody(),"utf-8"));
+        System.out.println(m.getMessageProperties().getHeaders().get("postBean1"));
+        System.out.println(m.getMessageProperties().getHeaders().get("postBean2"));
     }
 }

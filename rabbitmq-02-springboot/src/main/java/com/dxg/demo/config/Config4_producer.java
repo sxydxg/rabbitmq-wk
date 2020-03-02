@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/2/29
  */
 @Configuration
-public class Config4 {
+public class Config4_producer {
 
 
 

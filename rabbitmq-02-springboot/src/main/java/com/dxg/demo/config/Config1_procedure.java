@@ -19,7 +19,7 @@ import java.nio.channels.Channel;
  * @date 2020/2/29
  */
 //@Configuration
-public class Config1 {
+public class Config1_procedure {
 
 
 

@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
  * @date 2020/2/29
  */
 //@Configuration
-public class Config2 {
+public class Config2_consumer {
 
 
 
