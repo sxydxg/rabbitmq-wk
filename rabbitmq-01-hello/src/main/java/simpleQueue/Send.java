@@ -26,7 +26,7 @@ public class Send {
         //发送的消息
         String msg = DateUtil.toDay()+"-->Hello World! " ;
         channel.basicPublish("",queueName,null,msg.getBytes("utf-8"));
-
+        channel.confirmSelect();
     }
 
 
