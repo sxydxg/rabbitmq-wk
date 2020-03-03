@@ -3,7 +3,13 @@ spring:
     host: 192.168.37.131
     port: 5672
     username: guest
-    password: guset
+    password: guest
     virtual-host: /
     publisher-confirms: true
     publisher-returns: true
+    listener:
+      simple:
+        concurrency: 1
+        max-concurrency: 5
+        acknowledge-mode: manual
+
