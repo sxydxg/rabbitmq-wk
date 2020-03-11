@@ -15,7 +15,7 @@ import java.io.IOException;
 public class RabbitMqConnectionUtils {
     private static ConnectionFactory connectionFactory = new ConnectionFactory();
     static {
-        connectionFactory.setHost("192.168.37.128");
+        connectionFactory.setHost("192.168.37.131");
         connectionFactory.setPort(5672);
         connectionFactory.setUsername("guest");
         connectionFactory.setPassword("guest");
