@@ -4,6 +4,7 @@ import com.rabbitmq.client.*;
 import util.RabbitMqConnectionUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * 类说明
@@ -11,15 +12,13 @@ import java.io.IOException;
  * @author dingxigui
  * @date 2019/12/23
  */
-public class Receiver {
+public class R2 {
 
 
     public static void main(String[] args) throws IOException {
 
         final Channel channel = RabbitMqConnectionUtils.getChannel();
-        channel.queueDeclare("test-queue-1",false,false,false,null);
-        channel.exchangeDeclare("test-exchange-1", BuiltinExchangeType.FANOUT);
-        channel.queueBind("test-queue-1","test-exchange-1","test-dlx");
+
 
         DefaultConsumer defaultConsumer = new DefaultConsumer(channel){
             @Override
@@ -34,7 +33,7 @@ public class Receiver {
             }
         };
 
-        channel.basicConsume("test-queue-1",false,defaultConsumer);
+        channel.basicConsume("拒绝消息的队列",false,defaultConsumer);
 
     }
 }

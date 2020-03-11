@@ -21,27 +21,22 @@ public class CreateDLX {
 
         Channel channel = RabbitMqConnectionUtils.getChannel();
 
-        //这只是一个普通的队列
-        String deadExchange = "test-dlx-exchange";
-        String deadQueue = "test-dlx-queue" ;
-        String routingKey = "dlx.#" ;
-
-        // 声明了一个死信队列
-
+        //声明要给死信交换机
+        channel.queueDeclare("死信队列",false,false,false,null);
+        channel.exchangeDeclare("死信交换机", BuiltinExchangeType.FANOUT);
+        channel.queueBind("死信队列","死信交换机","");
 
         HashMap<String, Object> arguments = new HashMap<String, Object>();
         // 固定写法
-        arguments.put("x-dead-letter-exchange","dlx.exchange");
-        //声明一个队列(将arguments设置进去是最重要的一步)
-        channel.queueDeclare(deadQueue,false,false,false,arguments);
-        //声明一个交换机
-        channel.exchangeDeclare(deadExchange, BuiltinExchangeType.FANOUT);
-        //将交换机和队列绑定
-        channel.queueBind(deadQueue,deadExchange,routingKey,null);
+        arguments.put("x-dead-letter-exchange","死信交换机");
+        //由于创建的死信交换机为fanout类型，所以不需要设置死信路由键
+        // arguments.put("x-dead-letter-routing-key","");
+
+        //声明一个正常的交换机，并将arguments，设置到队列中
+        channel.queueDeclare("拒绝消息的队列",false,false,false,arguments);
 
 
-
-
+        channel.queueDeclare("会消息过期的队列",false,false,false,arguments);
 
 
     }
