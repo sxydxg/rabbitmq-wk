@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author dingxigui
  * @date 2020/3/3
  */
+
 @SpringBootApplication
 @EnableRabbit //注册rabbitList和rabbitHandler处理bean
 public class SpringBoot2Demo {
