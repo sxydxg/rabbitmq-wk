@@ -10,6 +10,6 @@ spring:
     listener:
       direct:
         acknowledge-mode: manual
-      type: direct  # 指定messageListerFactory类型的工厂
+      type: direct  # 指定messageListerFactory类型的工厂  ，看一下springboot 的autoconfig的ampq.rabbit配置类就可以得出结果
 
 
