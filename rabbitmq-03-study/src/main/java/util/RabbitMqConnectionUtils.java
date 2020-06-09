@@ -23,6 +23,10 @@ public class RabbitMqConnectionUtils {
         connectionFactory.setVirtualHost("/");
     }
 
+    public static void setHost(String host){
+        connectionFactory.setHost(host);
+    }
+
     /**
      *  获取一个连接
      * @return
